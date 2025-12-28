@@ -1,0 +1,14 @@
+com\socialize\rating\model\dto\SubmitRatingRequest.class
+com\socialize\rating\service\RatingService.class
+com\socialize\rating\controller\RatingController.class
+com\socialize\rating\repository\RatingRepository.class
+com\socialize\rating\model\dto\RatingDTO.class
+com\socialize\rating\model\dto\TrustScoreDTO$TrustScoreDTOBuilder.class
+com\socialize\rating\model\entity\TrustScore$TrustScoreBuilder.class
+com\socialize\rating\model\dto\TrustScoreDTO.class
+com\socialize\rating\model\entity\TrustScore.class
+com\socialize\rating\model\dto\RatingDTO$RatingDTOBuilder.class
+com\socialize\rating\model\entity\Rating.class
+com\socialize\rating\model\entity\Rating$RatingBuilder.class
+com\socialize\rating\RatingServiceApplication.class
+com\socialize\rating\repository\TrustScoreRepository.class

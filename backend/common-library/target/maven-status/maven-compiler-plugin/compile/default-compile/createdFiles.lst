@@ -1,0 +1,10 @@
+com\socialize\common\constants\AppConstants.class
+com\socialize\common\constants\KafkaTopics.class
+com\socialize\common\exception\ErrorResponse.class
+com\socialize\common\dto\ApiResponse.class
+com\socialize\common\exception\GlobalExceptionHandler.class
+com\socialize\common\exception\UnauthorizedException.class
+com\socialize\common\dto\LocationDTO.class
+com\socialize\common\exception\ResourceNotFoundException.class
+com\socialize\common\exception\BadRequestException.class
+com\socialize\common\dto\PageResponse.class

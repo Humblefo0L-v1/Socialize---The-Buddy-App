@@ -1,0 +1,103 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  
+  cloud:
+    config:
+      enabled: false
+      fail-fast: false
+    
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      
+      routes:
+        # User Service Routes
+        - id: user-service-auth
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /api/$\{segment}
+        
+        - id: user-service-users
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /api/$\{segment}
+            - AuthenticationFilter
+        
+        # Event Service Routes (future)
+        - id: event-service
+          uri: lb://EVENT-SERVICE
+          predicates:
+            - Path=/api/events/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /api/$\{segment}
+            - AuthenticationFilter
+        
+        # Rating Service Routes (future)
+        - id: rating-service
+          uri: lb://RATING-SERVICE
+          predicates:
+            - Path=/api/ratings/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /api/$\{segment}
+            - AuthenticationFilter
+        
+        # Chat Service Routes (future)
+        - id: chat-service
+          uri: lb://CHAT-SERVICE
+          predicates:
+            - Path=/api/chat/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /api/$\{segment}
+            - AuthenticationFilter
+      
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway
+
+# JWT Configuration
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+
+logging:
+  level:
+    root: INFO
+    com.socialize: DEBUG
+    org.springframework.cloud.gateway: DEBUG

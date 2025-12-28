@@ -1,0 +1,16 @@
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\dto\UpdateEventRequest.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\dto\EventMessage.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\config\KafkaConfig.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\dto\JoinEventRequest.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\repository\EventCategoryRepository.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\dto\EventDTO.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\dto\ParticipantDTO.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\service\EventService.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\entity\EventParticipant.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\entity\EventCategory.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\controller\EventController.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\EventServiceApplication.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\dto\CreateEventRequest.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\repository\EventParticipantRepository.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\repository\EventRepository.java
+C:\Users\Asus\Dev-Projects\buddy-social-map\backend\event-service\src\main\java\com\socialize\event\model\entity\Event.java

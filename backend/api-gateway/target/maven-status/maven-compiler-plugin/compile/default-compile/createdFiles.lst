@@ -1,0 +1,5 @@
+com\socialize\gateway\ApiGatewayApplication.class
+com\socialize\gateway\util\JwtUtil.class
+com\socialize\gateway\config\GatewayConfig.class
+com\socialize\gateway\filter\AuthenticationFilter.class
+com\socialize\gateway\filter\AuthenticationFilter$Config.class
