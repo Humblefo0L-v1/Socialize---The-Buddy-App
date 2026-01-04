@@ -1,0 +1,118 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: chat-service
+
+  # MongoDB Configuration
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: socialize_chat_db
+      auto-index-creation: true
+
+  # Redis Configuration
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  # Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: chat-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  # Cloud Config
+  cloud:
+    config:
+      enabled: false
+      uri: http://localhost:8888
+      fail-fast: false
+
+# Eureka Configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    hostname: localhost
+
+# JWT Configuration
+jwt:
+  secret: your-256-bit-secret-key-here-change-in-production-use-same-as-user-service
+  expiration: 86400000
+
+# WebSocket Configuration
+websocket:
+  allowed-origins: http://localhost:4200,http://localhost:3000
+  message-broker:
+    relay-host: localhost
+    relay-port: 61613
+    client-login: guest
+    client-passcode: guest
+
+# Chat Configuration
+chat:
+  max-message-length: 5000
+  max-file-size: 10485760 # 10MB in bytes
+  message-history-limit: 100
+  typing-indicator-timeout: 3000 # 3 seconds
+
+# Kafka Topics
+kafka:
+  topics:
+    new-message: new-message
+    message-read: message-read
+    typing-indicator: typing-indicator
+    request-approved: request-approved
+
+# Logging
+logging:
+  level:
+    com.socialze: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.data.mongodb: DEBUG
+    org.springframework.kafka: INFO
+    org.springframework.websocket: DEBUG
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
