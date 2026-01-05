@@ -1,0 +1,168 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: geolocation-service
+
+  # ===============================
+  # DATASOURCE (MySQL)
+  # ===============================
+  datasource:
+    url: jdbc:mysql://localhost:3306/socialize_db?allowPublicKeyRetrieval=true&useSSL=false
+    username: geo_user
+    password: geo_pass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: GeoLocationHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # ===============================
+  # JPA / HIBERNATE (Hibernate 6)
+  # ===============================
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+        use_sql_comments: true
+
+  # ===============================
+  # REDIS
+  # ===============================
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 2
+
+  # ===============================
+  # KAFKA
+  # ===============================
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: geolocation-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  # ===============================
+  # SPRING CLOUD CONFIG (DISABLED)
+  # ===============================
+  cloud:
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+
+# ===============================
+# EUREKA
+# ===============================
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    hostname: localhost
+
+# ===============================
+# JWT
+# ===============================
+jwt:
+  secret: your-256-bit-secret-key-here-change-in-production-use-same-as-user-service
+  expiration: 86400000
+
+# ===============================
+# LOCATION SERVICE CONFIG
+# ===============================
+location:
+  default-search-radius: 10000 # 10 km
+  max-search-radius: 50000 # 50 km
+  update-interval: 30 # seconds
+  history-retention-days: 30
+  accuracy-threshold: 100 # meters
+  batch-size: 100
+
+# ===============================
+# KAFKA TOPICS
+# ===============================
+kafka:
+  topics:
+    location-updates: location-updates
+    location-batch-updates: location-batch-updates
+    nearby-events: nearby-events
+    nearby-buddies: nearby-buddies
+
+# ===============================
+# LOGGING
+# ===============================
+logging:
+  level:
+    com.socialize: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.data.jpa: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.kafka: INFO
+
+# ===============================
+# ACTUATOR
+# ===============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# ===============================
+# SWAGGER / OPENAPI
+# ===============================
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+# ===============================
+# FEIGN
+# ===============================
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
