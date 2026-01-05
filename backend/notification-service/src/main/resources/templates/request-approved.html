@@ -1,0 +1,37 @@
+<!-- request-approved.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Approved</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #2196F3; color: white; padding: 20px; text-align: center; border-radius: 5px 5px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 5px 5px; }
+        .button { display: inline-block; padding: 12px 30px; background: #2196F3; color: white; text-decoration: none; border-radius: 5px; margin: 10px 0; }
+        .footer { text-align: center; margin-top: 20px; color: #888; font-size: 12px; }
+        .success { background: #e8f5e9; padding: 15px; border-left: 4px solid #4CAF50; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Request Approved!</h1>
+        </div>
+        <div class="content">
+            <p>Hi <strong th:text="${recipientName}">Buddy</strong>,</p>
+            <div class="success">
+                <p th:text="${message}">Great news! Your request has been approved!</p>
+            </div>
+            <p><strong th:text="${title}">Event Details</strong></p>
+            <p>You can now join the event group chat and start connecting with your buddies!</p>
+            <a href="#" class="button">Open Event Chat</a>
+        </div>
+        <div class="footer">
+            <p>© 2025 Socialize. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
